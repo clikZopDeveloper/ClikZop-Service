@@ -64,8 +64,6 @@ class HomeFragment : Fragment(), ApiResponseListner {
         apiCallDashboard()
 
 
-
-
         binding.CardInsert.setOnClickListener {
             callPGURL("https://atulautomotive.online/dealer-signup")
 
@@ -101,7 +99,6 @@ class HomeFragment : Fragment(), ApiResponseListner {
         apiClient.getApiPostCall(ApiContants.dashboard, params)
 
     }
-
 
     override fun success(tag: String?, jsonElement: JsonElement) {
         try {
@@ -241,7 +238,6 @@ class HomeFragment : Fragment(), ApiResponseListner {
 
         return menuList
     }
-
 
     fun handleRcComplaint() {
         binding.rcDashComplaint.layoutManager = GridLayoutManager(requireContext(), 2)

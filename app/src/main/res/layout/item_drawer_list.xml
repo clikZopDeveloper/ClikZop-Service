@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:layout_margin="@dimen/_2dip"
         android:background="@drawable/btn_round_shape_white"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/blue_color"
         android:padding="@dimen/_4dip">
 
         <ImageView

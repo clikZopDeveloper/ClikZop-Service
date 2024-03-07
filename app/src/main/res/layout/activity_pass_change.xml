@@ -12,16 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/blue_color"
         tools:context=".Activity.LoginActivity">
 
         <include
             android:id="@+id/igToolbar"
             layout="@layout/toolbar" />
-
-        <ScrollView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_5dip"
+            android:layout_gravity="center"
+            android:paddingVertical="10dp"
+            android:layout_marginTop="@dimen/_100dip"
+            android:layout_marginHorizontal="@dimen/_10dp"
+            app:cardElevation="@dimen/_5dip">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,7 +40,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10dp"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:hint="Enter Your New Password">
+                    android:hint="Enter Your New Password"
+                    app:boxStrokeColor="@color/white"
+                    app:boxBackgroundColor="@color/white"
+                    app:cursorColor="@color/blue">
 
                     <!--this is the actual edit text which takes the input-->
                     <com.google.android.material.textfield.TextInputEditText
@@ -54,16 +62,17 @@
                     android:layout_marginHorizontal="@dimen/_30dip"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/btn_round_shape"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/roboto_regular"
                     android:gravity="center"
                     android:padding="15dp"
+                    android:layout_marginBottom="10dp"
                     android:text="Submit"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
 
             </LinearLayout>
-        </ScrollView>
+        </androidx.cardview.widget.CardView>
         <!-- android:onClick="@{()->loginViewModel.submit()}"-->
 
     </LinearLayout>

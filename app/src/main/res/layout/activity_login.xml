@@ -88,8 +88,8 @@
             android:gravity="center"
             android:padding="15dp"
             android:text="Login"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/black"
             android:textSize="16sp" />
        <!-- android:onClick="@{()->loginViewModel.submit()}"-->
         <LinearLayout

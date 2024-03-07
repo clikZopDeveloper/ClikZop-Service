@@ -113,6 +113,7 @@ class AddExpensesActivity : AppCompatActivity(), ApiResponseListner,
 
 
         }
+
     }
 
     fun typeMode() {
@@ -206,8 +207,8 @@ class AddExpensesActivity : AppCompatActivity(), ApiResponseListner,
                 Intent.createChooser(intent, "Choose Pictures")
                 , SELECT_PICTURES
             )
-        }
-        else { // For latest versions API LEVEL 19+
+        }else {
+            // For latest versions API LEVEL 19+
             var intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             intent.addCategory(Intent.CATEGORY_OPENABLE)
@@ -217,9 +218,7 @@ class AddExpensesActivity : AppCompatActivity(), ApiResponseListner,
     }
 
     fun openCameraDialog(SELECT_PICTURES: Int,CAMERA_PERMISSION_CODE: Int) {
-        val dialog: Dialog = GeneralUtilities.openBootmSheetDailog(R.layout.dialog_camera, R.style.AppBottomSheetDialogTheme,
-            this
-        )
+        val dialog: Dialog = GeneralUtilities.openBootmSheetDailog(R.layout.dialog_camera, R.style.AppBottomSheetDialogTheme,this)
         val ivClose = dialog.findViewById<ImageView>(R.id.ivClose)
         val llInternalPhoto = dialog.findViewById<View>(R.id.llInternalPhoto) as LinearLayout
         val llClickPhoto = dialog.findViewById<View>(R.id.llClickPhoto) as LinearLayout
@@ -229,12 +228,14 @@ class AddExpensesActivity : AppCompatActivity(), ApiResponseListner,
             uploadImage(SELECT_PICTURES)
         }
 
-        llClickPhoto.setOnClickListener { dialog.dismiss()
+        llClickPhoto.setOnClickListener {
+            dialog.dismiss()
             requestPermission()
             ClickPicCamera(CAMERA_PERMISSION_CODE)
-
         }
+
         ivClose.setOnClickListener { dialog.dismiss() }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

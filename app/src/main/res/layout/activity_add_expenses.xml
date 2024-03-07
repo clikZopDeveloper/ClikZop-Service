@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/blue_color"
         tools:context=".Activity.LoginActivity">
 
         <include
@@ -35,7 +36,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10dp"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:hint="Enter Your Title">
+                    android:hint="Enter Your Title"
+                    app:boxStrokeColor="@color/white"
+                    app:boxBackgroundColor="@color/white"
+                    app:cursorColor="@color/blue">
 
                     <!--this is the actual edit text which takes the input-->
                     <com.google.android.material.textfield.TextInputEditText
@@ -51,7 +55,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10dp"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:hint="Enter Your Amount">
+                    android:hint="Enter Your Amount"
+                    app:boxStrokeColor="@color/white"
+                    app:boxBackgroundColor="@color/white"
+                    app:cursorColor="@color/blue">
 
                     <!--this is the actual edit text which takes the input-->
                     <com.google.android.material.textfield.TextInputEditText
@@ -67,9 +74,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    android:padding="6dp">
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/editDate"
@@ -78,6 +84,8 @@
                         android:layout_weight="1"
                         android:clickable="false"
                         android:cursorVisible="false"
+                        android:background="@drawable/btn_round_shape_white"
+                        android:paddingVertical="@dimen/_12sp"
                         android:drawableRight="@drawable/ic_baseline_calendar_month_24"
                         android:drawablePadding="10dp"
                         android:focusable="false"
@@ -88,12 +96,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5dip"
+                    android:layout_marginStart="@dimen/_10dp"
                     android:layout_marginTop="@dimen/_5dip"
                     android:fontFamily="@font/roboto_bold"
                     android:padding="@dimen/_6dp"
                     android:text="select Category"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_16sp" />
                 <RadioGroup
                     android:id="@+id/radioGroup"
@@ -101,7 +109,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/black_border"
+                    android:background="@drawable/btn_round_shape_white"
+                android:backgroundTint="@color/white"
                     android:orientation="horizontal"
                     android:paddingHorizontal="@dimen/_10dp">
 
@@ -143,13 +152,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10dp"
                     android:layout_marginTop="@dimen/_10dp"
-                    android:hint="Enter Your Comments">
+                    android:hint="Enter Your Comments"
+                    app:boxStrokeColor="@color/white"
+                    app:boxBackgroundColor="@color/white"
+                    app:cursorColor="@color/blue">
 
                     <!--this is the actual edit text which takes the input-->
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editComments"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,8 +170,8 @@
                     android:id="@+id/btnUplaodImages"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_6dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginHorizontal="@dimen/_10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/border"
                     android:orientation="vertical"
                     android:padding="10dp">
@@ -237,11 +250,11 @@
                     android:layout_marginHorizontal="@dimen/_30dip"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/btn_round_shape"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/roboto_regular"
                     android:gravity="center"
                     android:padding="15dp"
                     android:text="Submit"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
 

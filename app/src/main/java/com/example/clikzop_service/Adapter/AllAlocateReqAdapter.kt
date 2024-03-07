@@ -37,7 +37,6 @@ class AllAlocateReqAdapter(
              holder.tvOff.background = RoundView(context.resources.getColor(R.color.orange), RoundView.getRadius(20f))
              holder.tvAdd.visibility = View.VISIBLE*/
 
-
         holder.tvName.text = list[position].customerName
         holder.tvMobile.text = list[position].mobile
 

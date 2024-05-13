@@ -11,12 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/yellow_color"
+        android:background="@color/white"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="@dimen/_100dip"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_100dip"
             android:contentDescription="@string/nav_header_desc"
             android:layout_marginTop="@dimen/_40dip"
@@ -42,7 +42,7 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/yellow_color"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout

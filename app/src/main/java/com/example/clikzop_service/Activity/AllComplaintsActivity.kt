@@ -70,6 +70,8 @@ class AllComplaintsActivity : AppCompatActivity(), ApiResponseListner,
     val CAMERA_PERMISSION_CODE1 = 123
     var SELECT_PICTURES1 = 1
     var file2: File? = null
+    var worstatusType=""
+    var Status=""
     var activity: Activity = this
     val imgList: MutableList<File> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,7 +87,8 @@ class AllComplaintsActivity : AppCompatActivity(), ApiResponseListner,
         binding.igToolbar.ivLogout.visibility = View.GONE
         binding.igToolbar.switchDayStart.visibility = View.GONE
 
-        intent.getStringExtra("Status")?.let { apiAllCompaints(it) }
+        Status= intent.getStringExtra("Status").toString()
+        apiAllCompaints(Status)
       //  requestPermission()
         getLocation()
     }
@@ -105,6 +108,7 @@ class AllComplaintsActivity : AppCompatActivity(), ApiResponseListner,
         var mAdapter = AllComplaintsAdapter(this, data, object :
             RvStatusComplClickListner {
             override fun clickPos(status: String,workstatus: String,payableAmt: String, id: Int) {
+                worstatusType=workstatus
                 if (workstatus.equals("under_process")||workstatus.equals("stop")||workstatus.equals("rejected")||workstatus.equals("start")){
                     dialogRemark(status,workstatus,id)
                 }else if (workstatus.equals("completed")){
@@ -159,6 +163,7 @@ class AllComplaintsActivity : AppCompatActivity(), ApiResponseListner,
     override fun success(tag: String?, jsonElement: JsonElement?) {
         try {
             apiClient.progressView.hideLoader()
+
             if (tag == ApiContants.getComplaints) {
                 val officeTeamBean = apiClient.getConvertIntoModel<AllComplaintsBean>(
                     jsonElement.toString(),
@@ -168,17 +173,19 @@ class AllComplaintsActivity : AppCompatActivity(), ApiResponseListner,
                 if (officeTeamBean.error==false) {
                     handleComplaints(officeTeamBean.data)
                 }
-
             }
+
             if (tag == ApiContants.getUpdateComplaint) {
                 val officeTeamBean = apiClient.getConvertIntoModel<AllComplaintsBean>(
                     jsonElement.toString(),
                     AllComplaintsBean::class.java
                 )
-
                 if (officeTeamBean.error==false) {
+                    apiAllCompaints(Status)
                       Toast.makeText(this, officeTeamBean.msg, Toast.LENGTH_SHORT).show()
-                    finish()
+                    if (worstatusType.equals("completed")||worstatusType.equals("rejected")){
+                        finish()
+                    }
                 }
             }
 /*
@@ -238,6 +245,7 @@ class AllComplaintsActivity : AppCompatActivity(), ApiResponseListner,
                 .setCancelable(false)
                 .setPositiveButton("Yes") { dialog, id ->
                     // Delete selected note from database
+                    getLocation()
                     apiStatrt(status,workstatus,ids)
                 }
                 .setNegativeButton("No") { dialog, id ->
@@ -274,9 +282,11 @@ fun dialogRemark(status: String, workstatus: String, ids: Int) {
             Toast.makeText(this,"Enter Remark",Toast.LENGTH_SHORT).show()
         }else{
             if (workstatus.equals("rejected")){
+                getLocation()
                 apiStatrt(status,workstatus,ids)
            //     apiAccept(status,ids)
             }else{
+                getLocation()
                 apiStatrt(status,workstatus,ids)
             }
 
@@ -438,6 +448,7 @@ fun dialogRemark(status: String, workstatus: String, ids: Int) {
 
             if (imgList.size>0){
                 builder.dismiss()
+                getLocation()
                 apiStatrt(status,workstatus,ids)
             }else{
                 Toast.makeText(this,"Please Select Image",Toast.LENGTH_SHORT).show()

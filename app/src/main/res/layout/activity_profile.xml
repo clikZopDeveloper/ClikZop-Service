@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/blue_color"
+        android:background="@color/white"
         tools:context=".Activity.LoginActivity">
 
         <include
@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/_5dip"
-                app:cardBackgroundColor="@color/blue_100"
+                app:cardBackgroundColor="@color/login_box"
                 app:cardElevation="@dimen/_5dip"
                 android:layout_margin="@dimen/_4dip">
 

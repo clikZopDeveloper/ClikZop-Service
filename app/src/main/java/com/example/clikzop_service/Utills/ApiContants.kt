@@ -51,7 +51,5 @@ public class ApiContants {
         const val getUpdateComplaint = "update-complaint"
         const val getLocationUpdate = "location-update"
 
-
-
     }
 }

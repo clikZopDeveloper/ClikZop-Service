@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:layout_margin="@dimen/_2dip"
         android:background="@drawable/btn_round_shape_white"
-        android:backgroundTint="@color/blue_color"
+        android:backgroundTint="@color/login_box"
         android:padding="@dimen/_4dip">
 
         <ImageView
@@ -35,7 +35,7 @@
             android:paddingVertical="@dimen/_6dp"
             android:textSize="@dimen/_14sp"
             android:layout_marginStart="@dimen/_5dip"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
         <View
             android:layout_width="match_parent"

@@ -61,14 +61,11 @@ class HomeFragment : Fragment(), ApiResponseListner {
             binding.refreshLayout.isRefreshing = false
         }
 
-        apiCallDashboard()
-
-
         binding.CardInsert.setOnClickListener {
             callPGURL("https://atulautomotive.online/dealer-signup")
 
         }
-
+/*clickzop@figma*/
         binding.CardInsert2.setOnClickListener {
             //  callPGURL("https://atulautomotive.online/architect-signup")
 

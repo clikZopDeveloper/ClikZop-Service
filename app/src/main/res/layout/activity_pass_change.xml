@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/blue_color"
+        android:background="@color/white"
         tools:context=".Activity.LoginActivity">
 
         <include
@@ -25,6 +25,7 @@
             android:layout_gravity="center"
             android:paddingVertical="10dp"
             android:layout_marginTop="@dimen/_100dip"
+            app:cardBackgroundColor="@color/login_box"
             android:layout_marginHorizontal="@dimen/_10dp"
             app:cardElevation="@dimen/_5dip">
 
@@ -62,12 +63,13 @@
                     android:layout_marginHorizontal="@dimen/_30dip"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/btn_round_shape"
+                   android:backgroundTint="@color/colorPrimary"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center"
                     android:padding="15dp"
                     android:layout_marginBottom="10dp"
                     android:text="Submit"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
 

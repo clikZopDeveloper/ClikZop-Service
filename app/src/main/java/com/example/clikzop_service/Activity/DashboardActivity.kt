@@ -1,6 +1,7 @@
 package com.example.clikzop_service.Activity
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
@@ -54,13 +55,13 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
     lateinit var llMaster: LinearLayout
     lateinit var ivDownArrowMaster: ImageView
 
-
+val isDashboard=false
     private var currentLoc: String? = null
     private val permissionId = 2
     var list: List<Address>? = null
     var isActive = true
     var dayStatus = 5
-
+    private var isSwitchOn = false
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,8 +85,11 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
 
         handleRcMaster()
         getLocation()
-
-        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        apiCallDashboard()
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        );
         startService(Intent(this, LocationService::class.java))
         //   binding.appBarMain.appbarLayout.switchDayStart="Day Start"
         binding.appBarMain.appbarLayout.ivLogout.setOnClickListener {
@@ -94,7 +98,7 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
 
         Log.d("token>>>>>", PrefManager.getString(ApiContants.AccessToken, ""))
 
-        if (PrefManager.getString(ApiContants.dayStatus, "").equals("start") || dayStatus == 1) {
+        /*if (PrefManager.getString(ApiContants.dayStatus, "").equals("start") || dayStatus == 1) {
             binding.appBarMain.appbarLayout.switchDayStart.isChecked = true
             //    Toast.makeText(this@DashboardActivity, "rr", Toast.LENGTH_SHORT).show()
             binding.appBarMain.appbarLayout.switchDayStart.text = "Day Start"
@@ -102,24 +106,8 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
             //     Toast.makeText(this@DashboardActivity, "werwe", Toast.LENGTH_SHORT).show()
             binding.appBarMain.appbarLayout.switchDayStart.isChecked = false
             binding.appBarMain.appbarLayout.switchDayStart.text = "Day End"
-        }
+        }*/
 
-        binding.appBarMain.appbarLayout.switchDayStart.setOnCheckedChangeListener({ _, isChecked ->
-            if (isChecked) {
-                binding.appBarMain.appbarLayout.switchDayStart.text = "Day Start"
-                getLocation()
-                apiCallDayStatus(ApiContants.startDay)
-                PrefManager.putString(ApiContants.dayStatus, "start")
-            } else {
-                binding.appBarMain.appbarLayout.switchDayStart.text = "Day End"
-                getLocation()
-
-                apiCallDayStatus(ApiContants.endDay)
-                PrefManager.putString(ApiContants.dayStatus, "end")
-            }
-            /*  Toast.makeText(this@DashboardActivity, message.toString(),
-                  Toast.LENGTH_SHORT).show()*/
-        })
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
@@ -148,6 +136,26 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
         })
     }
 
+    fun dialogConfirmation(dayType: String, msg: String) {
+
+        val builder = AlertDialog.Builder(this@DashboardActivity)
+        builder.setMessage(msg)
+            .setCancelable(false)
+            .setPositiveButton("Yes") { dialog, id ->
+                // Delete selected note from database
+
+                apiCallDayStatus(dayType)
+            }
+            .setNegativeButton("No") { dialog, id ->
+                // Dismiss the dialog
+                //  binding.appBarMain.appbarLayout.switchDayStart.isChecked = isSwitchOn
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
+
+    }
+
     fun apiCallDayStatus(dayStatus: String) {
         SalesApp.isAddAccessToken = true
         apiClient = ApiController(this, this)
@@ -158,7 +166,16 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
 
     }
 
+    fun apiCallDashboard() {
+        SalesApp.isAddAccessToken = true
+        apiClient = ApiController(this, this)
+        val params = Utility.getParmMap()
+        params["username"] = PrefManager.getString(ApiContants.mobileNumber, "")
+        params["password"] = PrefManager.getString(ApiContants.password, "")
+        // apiClient.progressView.showLoader()
+        apiClient.getApiPostCall(ApiContants.dashboard, params)
 
+    }
 
     fun apiCallLogout() {
         SalesApp.isAddAccessToken = true
@@ -173,6 +190,25 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
     override fun success(tag: String?, jsonElement: JsonElement) {
         try {
             apiClient.progressView.hideLoader()
+            if (tag == ApiContants.dashboard) {
+                val dashboardBean = apiClient.getConvertIntoModel<DashboardBean>(
+                    jsonElement.toString(),
+                    DashboardBean::class.java
+                )
+
+                if (dashboardBean.error == false) {
+                    isDashboard==true
+                    if (dashboardBean.data.attendance == true) {
+                     //   Toast.makeText(this, "werwer", Toast.LENGTH_SHORT).show()
+
+                        binding.appBarMain.appbarLayout.switchDayStart.setChecked(true);
+                        handleDaysStatus()
+                    } else {
+                        binding.appBarMain.appbarLayout.switchDayStart.setChecked(false);
+                        handleDaysStatus()
+                    }
+                }
+            }
             if (tag == ApiContants.logout) {
                 val baseResponseBean = apiClient.getConvertIntoModel<BaseResponseBean>(
                     jsonElement.toString(),
@@ -183,6 +219,7 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
                 GeneralUtilities.launchActivity(this, LoginActivity::class.java)
                 finishAffinity()
             }
+
             if (tag == ApiContants.startDay) {
                 val dayStatusBean = apiClient.getConvertIntoModel<StartDayBean>(
                     jsonElement.toString(),
@@ -203,7 +240,6 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
                 }
             }
 
-
         } catch (e: Exception) {
             Log.d("error>>", e.localizedMessage)
         }
@@ -217,6 +253,25 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
     }
 
 
+    fun handleDaysStatus(){
+        binding.appBarMain.appbarLayout.switchDayStart.setOnCheckedChangeListener({ _, isChecked ->
+            if (isChecked) {
+                binding.appBarMain.appbarLayout.switchDayStart.text = "Day Start"
+                getLocation()
+
+                dialogConfirmation(ApiContants.startDay, "Are you sure you want to start day?")
+
+            } else {
+                binding.appBarMain.appbarLayout.switchDayStart.text = "Day End"
+                getLocation()
+
+                dialogConfirmation(ApiContants.endDay, "Are you sure you want to end day?")
+
+            }
+            /*  Toast.makeText(this@DashboardActivity, message.toString(),
+                  Toast.LENGTH_SHORT).show()*/
+        })
+    }
     fun handleRcMaster() {
         rcMaster.layoutManager = LinearLayoutManager(this)
         var mAdapter = CommonFieldDrawerAdapter(this, getMaster(), object :
@@ -244,7 +299,7 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
                         )
                     )
 
-                }  else if (pos == 4) {
+                } else if (pos == 4) {
                     startActivity(
                         Intent(
                             this@DashboardActivity,
@@ -384,9 +439,10 @@ class DashboardActivity : AppCompatActivity(), ApiResponseListner {
             LocationManager.NETWORK_PROVIDER
         )
     }
+
     override fun onDestroy() {
         super.onDestroy()
         // Start the LocationService when the app is closed
-    //    startService(Intent(this, LocationService::class.java))
+        //    startService(Intent(this, LocationService::class.java))
     }
 }

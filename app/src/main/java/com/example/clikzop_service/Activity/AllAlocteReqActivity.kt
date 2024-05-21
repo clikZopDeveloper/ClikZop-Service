@@ -85,7 +85,6 @@ class AllAlocteReqActivity : AppCompatActivity(), ApiResponseListner,
                     dialogRemark(status,workstatus,id)
                 }else{
                      dialog(status,id)
-
                  }
             }
         })
@@ -96,7 +95,7 @@ class AllAlocteReqActivity : AppCompatActivity(), ApiResponseListner,
     fun dialog(status: String,ids: Int) {
 
         val builder = AlertDialog.Builder(this@AllAlocteReqActivity)
-        builder.setMessage("Are you sure you want to start service?")
+        builder.setMessage("Do you want to accept this request?")
             .setCancelable(false)
             .setPositiveButton("Yes") { dialog, id ->
                 // Delete selected note from database

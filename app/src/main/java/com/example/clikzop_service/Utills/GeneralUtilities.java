@@ -488,6 +488,12 @@ public class GeneralUtilities {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+    public static void makeCall(Context context,String mobNumber){
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" +mobNumber));
+        context.startActivity(intent);
+    }
+
     /*  public static void showDialog(Context context,String message)
       {
           dialog=new ProgressDialog(context);
@@ -733,7 +739,6 @@ public class GeneralUtilities {
         successlayout.setVisibility(View.GONE);
         signupbutton.setVisibility(View.GONE);
     }
-
 
     public static void hideCustomLoader(View sendlottielayout, View signupbutton, View successlayout) {
         sendlottielayout.setVisibility(View.GONE);
@@ -1002,6 +1007,7 @@ public class GeneralUtilities {
         ClipData data = ClipData.newPlainText(label, text);
         manager.setPrimaryClip(data);
     }
+
     public static void copyText(Context context,String labelView,String value){
         ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(labelView,value);
@@ -1128,6 +1134,7 @@ public class GeneralUtilities {
 
         }
     }
+
     public static BottomSheetDialog openBootmSheetDailog(Integer layoutId, int dialogStyle, Activity activity) {
         BottomSheetDialog dialog = new BottomSheetDialog(activity, dialogStyle);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);

@@ -37,7 +37,6 @@ class HomeFragment : Fragment(), ApiResponseListner {
     var pending = ""
     var accepted = ""
 
-
     var pendingComplaint = ""
     var completedComplaint = ""
     var rejectedComplaint = ""
@@ -65,7 +64,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
             callPGURL("https://atulautomotive.online/dealer-signup")
 
         }
-/*clickzop@figma*/
+
         binding.CardInsert2.setOnClickListener {
             //  callPGURL("https://atulautomotive.online/architect-signup")
 
@@ -75,7 +74,6 @@ class HomeFragment : Fragment(), ApiResponseListner {
             //  callPGURL("https://atulautomotive.online/architect-signup")
 
         }
-
 
         //    val textView: TextView = binding.textHome
         /*   homeViewModel.text.observe(viewLifecycleOwner) {
@@ -139,8 +137,6 @@ class HomeFragment : Fragment(), ApiResponseListner {
                     } else {
                         rejected = "0"
                     }
-
-
 
                     if (!dashboardBean.data.complaints.pending.isNullOrEmpty()) {
                         pendingComplaint = dashboardBean.data.complaints.pending
@@ -294,7 +290,6 @@ class HomeFragment : Fragment(), ApiResponseListner {
             startActivity(intent)
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

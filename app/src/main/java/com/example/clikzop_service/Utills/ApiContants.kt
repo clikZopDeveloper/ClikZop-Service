@@ -5,8 +5,8 @@ public class ApiContants {
         var isconnectedtonetwork = false
 
 
-        const val BaseUrl="https://demo.serviceexpertz.in/api/"//Live URL
-        const val ImgBaseUrl="https://demo.serviceexpertz.in/api/"//Image Base URL
+        const val BaseUrl="https://service.clikzopdevp.com/api/"//Live URL
+        const val ImgBaseUrl="https://service.clikzopdevp.com/api/"//Image Base URL
 
         const val EmailAddress = "****************"
         const val REQ_CODE_VERSION_UPDATE = 530

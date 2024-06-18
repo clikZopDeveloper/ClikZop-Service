@@ -4,10 +4,12 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clikzop_service.R
 import com.example.clikzop_service.Model.AllContactListBean
+import com.example.clikzop_service.Utills.GeneralUtilities
 
 import com.example.clikzop_service.Utills.RvStatusClickListner
 
@@ -42,9 +44,11 @@ class AllContactAdapter(var context: Activity, var list: List<AllContactListBean
       //      holder.itemView.visibility=View.GONE
         }*/
 
-
         holder.itemView.setOnClickListener {
             rvClickListner.clickPos("",list[position].id)
+        }
+        holder.ivCall.setOnClickListener {
+           GeneralUtilities.makeCall(context,list[position].phone)
         }
     }
 
@@ -58,7 +62,7 @@ class AllContactAdapter(var context: Activity, var list: List<AllContactListBean
         val tvDepartment: TextView = itemview.findViewById(R.id.tvDepartment)
         val tvActive: TextView = itemview.findViewById(R.id.tvActive)
         val tvDate: TextView = itemview.findViewById(R.id.tvDate)
+        val ivCall: ImageView = itemview.findViewById(R.id.ivCall)
 
     }
-
 }

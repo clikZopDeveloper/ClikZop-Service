@@ -272,6 +272,7 @@ val isDashboard=false
                   Toast.LENGTH_SHORT).show()*/
         })
     }
+
     fun handleRcMaster() {
         rcMaster.layoutManager = LinearLayoutManager(this)
         var mAdapter = CommonFieldDrawerAdapter(this, getMaster(), object :
@@ -295,7 +296,7 @@ val isDashboard=false
                     startActivity(
                         Intent(
                             this@DashboardActivity,
-                            ProfileActivity::class.java
+                            AllContactActivity::class.java
                         )
                     )
 
@@ -303,7 +304,7 @@ val isDashboard=false
                     startActivity(
                         Intent(
                             this@DashboardActivity,
-                            AllContactActivity::class.java
+                            ProfileActivity::class.java
                         )
                     )
 
@@ -332,15 +333,14 @@ val isDashboard=false
         menuList.add(MenuModelBean(1, "Add Expenses", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(2, "All Expenses", "", R.drawable.ic_dashbord))
         //  menuList.add(MenuModelBean(2, "Insert Installer", "", R.drawable.ic_dashbord))
-        menuList.add(MenuModelBean(3, "Profile", "", R.drawable.ic_dashbord))
-        menuList.add(MenuModelBean(4, "All Contacts", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(3, "All Contacts", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(4, "Profile", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(5, "Change Password", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(6, "Logout", "", R.drawable.ic_dashbord))
 
 
         return menuList
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -445,4 +445,5 @@ val isDashboard=false
         // Start the LocationService when the app is closed
         //    startService(Intent(this, LocationService::class.java))
     }
+
 }

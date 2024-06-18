@@ -48,6 +48,7 @@ class AllExpensesActivity : AppCompatActivity(), ApiResponseListner,
         binding.igToolbar.switchDayStart.visibility = View.GONE
 
     //    intent.getStringExtra("leadStatus")?.let { apiAllLead(it) }
+
         apiAllExpenses()
     }
 
@@ -72,14 +73,13 @@ class AllExpensesActivity : AppCompatActivity(), ApiResponseListner,
                         AllExpnImagesActivity::class.java
                     ).putExtra("id",id.toString())
                 )
-
-
             }
         })
         binding.rcOfficeTeam.adapter = mAdapter
         // rvMyAcFiled.isNestedScrollingEnabled = false
 
     }
+
     override fun success(tag: String?, jsonElement: JsonElement?) {
         try {
             apiClient.progressView.hideLoader()
@@ -97,16 +97,12 @@ class AllExpensesActivity : AppCompatActivity(), ApiResponseListner,
         }catch (e:Exception){
             Log.d("error>>",e.localizedMessage)
         }
-
-
-
     }
 
     override fun failure(tag: String?, errorMessage: String) {
         apiClient.progressView.hideLoader()
         Utility.showSnackBar(this, errorMessage)
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -133,6 +129,7 @@ class AllExpensesActivity : AppCompatActivity(), ApiResponseListner,
     }
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {}
+
     override fun onDestroy() {
         super.onDestroy()
         // Start the LocationService when the app is closed

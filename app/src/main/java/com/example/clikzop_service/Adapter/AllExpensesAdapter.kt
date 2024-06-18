@@ -1,15 +1,20 @@
 package com.example.clikzop_service.Adapter
 
 import android.app.Activity
+import android.app.Dialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.clikzop_service.R
 import com.example.clikzop_service.Model.AllExpensesBean
+import com.example.clikzop_service.Utills.GeneralUtilities
 
 import com.example.clikzop_service.Utills.RvStatusClickListner
+import com.stpl.antimatter.Utils.ApiContants
 
 
 class AllExpensesAdapter(var context: Activity, var list: List<AllExpensesBean.Data>, var rvClickListner: RvStatusClickListner) : RecyclerView.Adapter<AllExpensesAdapter.MyViewHolder>(){
@@ -41,9 +46,11 @@ class AllExpensesAdapter(var context: Activity, var list: List<AllExpensesBean.D
       /*  if ("Retailer"=="Retailer"){
       //      holder.itemView.visibility=View.GONE
         }*/
+        holder.ivView.setOnClickListener {
+           // openExpesneDialog(list[position].file)
+        }
 
-
-        holder.itemView.setOnClickListener {
+        holder.ivView.setOnClickListener {
             rvClickListner.clickPos("",list[position].id)
         }
     }
@@ -58,7 +65,19 @@ class AllExpensesAdapter(var context: Activity, var list: List<AllExpensesBean.D
         val tvDepartment: TextView = itemview.findViewById(R.id.tvDepartment)
         val tvActive: TextView = itemview.findViewById(R.id.tvActive)
         val tvDate: TextView = itemview.findViewById(R.id.tvDate)
+        val ivView: ImageView = itemview.findViewById(R.id.ivView)
+    }
 
+    fun openExpesneDialog(file: String) {
+        val dialog: Dialog = GeneralUtilities.openBootmSheetDailog(
+            R.layout.dialog_view_expense, R.style.AppBottomSheetDialogTheme,
+            context
+        )
+        val ivClose = dialog.findViewById<ImageView>(R.id.ivClose)
+        val ivExpesneImg = dialog.findViewById<ImageView>(R.id.ivExpesneImg) as ImageView
+
+        Glide.with(context).load(ApiContants.BaseUrl+file).into(ivExpesneImg)
+        ivClose.setOnClickListener { dialog.dismiss() }
     }
 
 }

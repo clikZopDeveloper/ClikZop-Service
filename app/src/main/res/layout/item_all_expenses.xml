@@ -43,11 +43,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:fontFamily="@font/roboto_bold"
                     android:textSize="@dimen/_14sp"
                     android:layout_marginStart="@dimen/_10dp"
                     android:textColor="@color/black" />
+                <ImageView
+                    android:id="@+id/ivView"
+                    android:layout_width="@dimen/_30dip"
+                    android:layout_height="@dimen/_30dip"
+                    android:src="@drawable/ic_baseline_remove_red_eye_24"
+                    android:background="@drawable/circle"
+                    android:padding="@dimen/_2dip"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

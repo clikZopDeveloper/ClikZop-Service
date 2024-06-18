@@ -79,7 +79,6 @@ class AddExpensesActivity : AppCompatActivity(), ApiResponseListner,
         //   callCityListAdapter()
 
         binding.apply {
-
             btnUplaodImages.setOnClickListener {
                 openCameraDialog(SELECT_PICTURES1,CAMERA_PERMISSION_CODE1)
             }
@@ -89,6 +88,7 @@ class AddExpensesActivity : AppCompatActivity(), ApiResponseListner,
             }
 
             typeMode()
+
             editDate.setOnClickListener(View.OnClickListener {
                 val c = Calendar.getInstance()
                 val year = c[Calendar.YEAR]
@@ -111,9 +111,7 @@ class AddExpensesActivity : AppCompatActivity(), ApiResponseListner,
                 datePickerDialog.show()
             })
 
-
         }
-
     }
 
     fun typeMode() {
@@ -129,7 +127,6 @@ class AddExpensesActivity : AppCompatActivity(), ApiResponseListner,
 
                 }else if (checkedId == R.id.rbOthers) {
                     projectType = "Others"
-
                 }
             }
         })
@@ -188,7 +185,6 @@ class AddExpensesActivity : AppCompatActivity(), ApiResponseListner,
         if (requestCode==PERMISSION_CODE){
             if (grantResults[0]== PackageManager.PERMISSION_GRANTED && grantResults[0]== PackageManager.PERMISSION_GRANTED && grantResults[0]== PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this,"Permission is Granted",Toast.LENGTH_SHORT).show()
-
             }
             else{
                 requestPermission()
@@ -340,6 +336,7 @@ class AddExpensesActivity : AppCompatActivity(), ApiResponseListner,
     }
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {}
+
     override fun onDestroy() {
         super.onDestroy()
         // Start the LocationService when the app is closed

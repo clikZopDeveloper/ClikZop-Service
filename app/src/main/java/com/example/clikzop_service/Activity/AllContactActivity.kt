@@ -72,6 +72,7 @@ class AllContactActivity : AppCompatActivity(), ApiResponseListner,
         // rvMyAcFiled.isNestedScrollingEnabled = false
 
     }
+
     override fun success(tag: String?, jsonElement: JsonElement?) {
         try {
             apiClient.progressView.hideLoader()
@@ -89,9 +90,6 @@ class AllContactActivity : AppCompatActivity(), ApiResponseListner,
         }catch (e:Exception){
             Log.d("error>>",e.localizedMessage)
         }
-
-
-
     }
 
     override fun failure(tag: String?, errorMessage: String) {
